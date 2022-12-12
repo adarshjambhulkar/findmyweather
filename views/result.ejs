@@ -1,0 +1,165 @@
+<%- include('header'); -%>
+
+
+  <div class="main-container">
+    <div class="navbar">
+      <div class="logo">
+        <a href="/"><img class="logoImg" src="images/logo.png" width="50px" height="50px" alt="logo"></a>
+        <h3 class="main-logo">Find My Weather</h3>
+      </div>
+      <form action="/" method="post">
+        <div class="search-2">
+          <input class="input blurBg" id="cityname" type="text" name="cityName" placeholder="Enter Your city"
+            autocomplete="off" required>
+          <button class="btn" type="submit" name="button">GO</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="temp-container">
+
+      <div class="heading">
+        <h2>
+          <%= resultData.country %>, <%= resultData.name %>
+        </h2>
+      </div>
+
+
+      <div class="temp-box">
+        <div class="temp-card-1">
+          <h1 class="temp">
+            <%= resultData.temp %>
+          </h1>
+          <h1 class="unit">°C</h1>
+        </div>
+        <div class="temp-card-2">
+          <div class="more-info">
+            <p class="main">
+              <%= resultData.main %>
+            </p>
+            <p class="dateTime">
+              <%= resultData.date %>
+            </p>
+            <p class="feelLike">Feel Like : <%= resultData.feels_like %>°C</p>
+            <p class="population">Population : <%= resultData.population %>
+            </p>
+          </div>
+          <div class="weather-img">
+            <img class="weather-icon" src="<%= resultData.iconUrl %>" alt="icon">
+            <p class="discription">
+              <%= resultData.discription %>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <hr>
+    <div class="info-container">
+      <div class="info-cards blurBg">
+        <p class="card-title">Temperature</p>
+        <hr>
+        <div class="card-item grid-2">
+          <div class="info-box">
+            <p class="info-val">
+              <%= resultData.temp_max %> °c
+            </p>
+            <p class="card-footer">Max</p>
+          </div>
+          <div class="info-box">
+            <p class="info-val">
+              <%= resultData.temp_min %> °c
+            </p>
+            <p class="card-footer">Min</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-cards blurBg">
+        <p class="card-title">Atmospheric</p>
+        <hr>
+        <div class="card-item grid-2">
+          <div class="info-box">
+            <p class="info-val">
+              <%= resultData.humidity %> %
+            </p>
+            <p class="card-footer">Humidity</p>
+
+          </div>
+          <div class="info-box">
+            <p class="info-val">
+              <%= resultData.pressure %> psi
+            </p>
+            <p class="card-footer">Pressure</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-cards blurBg">
+        <p class="card-title">Daylight</p>
+        <hr>
+        <div class="card-item grid-2">
+          <div class="info-box">
+            <p class="info-val">
+              <%= resultData.sunrise %>
+            </p>
+            <p class="card-footer">Sunrise</p>
+          </div>
+          <div class="info-box">
+            <p class="info-val">
+              <%= resultData.sunset %>
+            </p>
+            <p class="card-footer">Sunset</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-cards blurBg">
+        <p class="card-title">Wind</p>
+        <hr>
+        <div class="card-item grid-2">
+          <div class="info-box">
+            <p class="info-val">
+              <%= resultData.speed %>kmh
+            </p>
+
+            <p class="card-footer">Speed</p>
+          </div>
+          <div class="info-box">
+            <p class="info-val">
+              <%= resultData.deg %>°
+            </p>
+            <p class="card-footer">Direction</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="forecast-container ">
+      <p class="card-title">Forecast</p>
+      <hr>
+      <div class="forecast">
+        <% forecast.forEach(function(item){%>
+          <% let time=item.dt_txt.split(" ") %> 
+        <div class=" forecast-item blurBg">
+            <p class="forecast-head">
+              <%= time[1]!="00:00:00" ? time[1].slice(0, 5): time[0].slice(5, 10) %>
+            </p>
+            <hr>
+            <p>
+              <%= item.main.temp %> °C
+            </p>
+            <img class="forecast-logo" src='https://openweathermap.org/img/wn/<%=item.weather[0].icon%>@2x.png'
+              alt="icon">
+            <p class="forecast-footer">
+              <%= item.weather[0].main %>
+            </p>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+
+
+  <%- include('footer'); -%>
