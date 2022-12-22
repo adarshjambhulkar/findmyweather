@@ -21,10 +21,15 @@ app.get("/", function (req, res) {
   });
 });
 
-
-app.post("/", async function (req, res) {
-
+app.post("/",function(req,res){
   let city = req.body.cityName;
+  res.redirect("/"+city)
+})
+
+
+app.get("/:city", async function (req, res) {
+
+  let city = req.params.city.split(" ").join("%20");
 
   const appkey = process.env.SECRETKEY;
   const unit = "metric";
