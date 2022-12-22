@@ -376,6 +376,10 @@ hr {
   .temp {
     font-size: 110px;
   }
+  .info-cards {
+    padding: 30px 10px;
+    font-size: large;
+  }
 
   .info-container {
     grid-template-columns: 1fr;
