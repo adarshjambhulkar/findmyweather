@@ -24,7 +24,7 @@ app.get("/", function (req, res) {
 app.post("/",function(req,res){
   let city = req.body.cityName;
   res.redirect("/"+city)
-})
+});
 
 
 app.get("/:city", async function (req, res) {
